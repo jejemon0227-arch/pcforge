@@ -2,18 +2,30 @@
   "version": 2,
   "builds": [
     {
-      "src": "public/phpinfo.php",
+      "src": "api/index.php",
+      "use": "@vercel/php"
+    },
+    {
+      "src": "api/info.php", 
+      "use": "@vercel/php"
+    },
+    {
+      "src": "api/json.php",
       "use": "@vercel/php"
     }
   ],
   "routes": [
     {
-      "src": "/phpinfo",
-      "dest": "/public/phpinfo.php"
+      "src": "/info",
+      "dest": "/api/info.php"
     },
     {
-      "src": "/",
-      "dest": "/public/phpinfo.php"
+      "src": "/json",
+      "dest": "/api/json.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
     }
   ]
 }
