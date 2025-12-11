@@ -8,6 +8,22 @@
     </div>
 @endif
 
+@if(session('deleteproduct_message'))
+    <div style="margin-bottom: 10px; color: black; background-color: orangered;">
+        {{ session('deleteproduct_message') }}
+    </div>
+@endif
+
+  <div class="list-inline-item">
+            <form action="{{route('admin.searchproduct')}}" method="post">
+                @csrf
+              <div class="form-group">
+                <input type="search" name="search" placeholder="ano hanap mo pre">
+                <button type="submit" class="submit">Search</button>
+              </div>
+            </form>
+            </div>
+
 <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
     <thead>
         <tr style="background-color: #f2f2f2;">
@@ -25,7 +41,7 @@
         @foreach($products as $product)
         <tr style="border-bottom: 1px solid #ddd;">
             <td style="padding: 12px;">{{ $product->product_title }}</td>
-            <td style="padding: 12px;">{{ $product->product_description}}</td>
+            <td style="padding: 12px;">{{ Str::limit($product->product_description,10)}}</td>
             <td style="padding: 12px;">{{ $product->product_quantity}}</td>
             <td style="padding: 12px;">{{ $product->product_price}}</td>   
             <td style="padding: 12px;">
@@ -34,19 +50,13 @@
             <td style="padding: 12px;">{{$product->product_category }}</td>
 
             <td style="padding: 12px;">
-                <a href=""style=color:green;
-                   style="color: red; text-decoration:none;"
-                   >
-                    update
-                    <a href=""
-                   style="color: red; text-decoration:none;"
-                   onclick="return confirm('Are you sure?')">
-                    Delete
-                  </a>
+                <a href="{{ route('admin.updateproduct',$product->id) }}"style=color:green;
+                   style="color: red; text-decoration:none;" > update</a>
+                <a href="{{ route('admin.deleteproduct',$product->id) }}" style="color: red; text-decoration:none;" onclick="return confirm('Are you sure?')">Delete </a>
             </td>
         </tr>
         @endforeach
-        {{$products->links()}}
+       {{ $products->links()}}
     </tbody>
 </table>
 
