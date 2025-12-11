@@ -1,31 +1,37 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/index.php",
-      "use": "@vercel/php"
-    },
-    {
-      "src": "api/info.php", 
-      "use": "@vercel/php"
-    },
-    {
-      "src": "api/json.php",
-      "use": "@vercel/php"
+  "functions": {
+    "functions/php.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
     }
-  ],
+  },
   "routes": [
     {
+      "src": "/test",
+      "dest": "/functions/php.js"
+    },
+    {
+      "src": "/time",
+      "dest": "/functions/php.js"
+    },
+    {
       "src": "/info",
-      "dest": "/api/info.php"
+      "dest": "/functions/php.js"
     },
     {
       "src": "/json",
-      "dest": "/api/json.php"
+      "dest": "/functions/php.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/api/index.php"
+      "dest": "/functions/php.js"
+    }
+  ],
+  "builds": [
+    {
+      "src": "functions/php.js",
+      "use": "@vercel/node"
     }
   ]
 }
