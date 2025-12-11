@@ -1,0 +1,1 @@
+echo '<?php echo "PHP IS WORKING: " . date("Y-m-d H:i:s"); phpinfo(); ?>' > public/phpinfo.php

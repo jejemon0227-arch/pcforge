@@ -2,14 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "public/index.php",
-      "use": "@vercel/php@0.6.0"
+      "src": "public/phpinfo.php",
+      "use": "@vercel/php"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/public/index.php"
+      "src": "/phpinfo",
+      "dest": "/public/phpinfo.php"
+    },
+    {
+      "src": "/",
+      "dest": "/public/phpinfo.php"
     }
   ]
 }
